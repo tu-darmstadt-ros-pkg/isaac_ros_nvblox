@@ -40,12 +40,12 @@ endif()
 # (via ${<pkg>_TARGETS}) propagate C compile features.
 project(nvblox_ros LANGUAGES C CXX CUDA)
 
-# By default only the GPU of the build machine is targeted. To build for all architectures
-# supported by Isaac ROS (set in isaac_ros_common), e.g. on a build server, use
-#    colcon build --cmake-args "-DBUILD_ALL_CUDA_ARCHITECTURES=ON"
+# Build server branch: by default all architectures supported by Isaac ROS (set in
+# isaac_ros_common) are built. To target only the GPU of the build machine, use
+#    colcon build --cmake-args "-DBUILD_ALL_CUDA_ARCHITECTURES=OFF"
 # An explicit -DCMAKE_CUDA_ARCHITECTURES=... always takes precedence.
 option(BUILD_ALL_CUDA_ARCHITECTURES
-  "Build for all Isaac ROS CUDA architectures instead of only the native GPU" OFF)
+  "Build for all Isaac ROS CUDA architectures instead of only the native GPU" ON)
 if(NVBLOX_ROS_DEFAULT_CUDA_ARCHITECTURES)
   unset(CMAKE_CUDA_ARCHITECTURES CACHE)
   if(NOT BUILD_ALL_CUDA_ARCHITECTURES)
